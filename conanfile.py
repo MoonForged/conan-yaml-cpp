@@ -13,7 +13,7 @@ class YamlCppConan( ConanFile ):
   options = { 'shared': [ True, False ] }
   default_options = 'shared=False'
   generators = 'cmake'
-  requires = 'Boost/1.61.0@moonforged/testing'
+  requires = 'Boost/1.60.0@lasote/stable'
   folder = '%s-%s-%s' % ( name, name, version )
 
   def source( self ):
