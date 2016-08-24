@@ -7,7 +7,7 @@ environment:
     CONAN_UPLOAD: 1
     CONAN_REFERENCE: "yaml-cpp/0.5.3"
     CONAN_USERNAME: "moonforged"
-    CONAN_CHANNEL: "testing"
+    CONAN_CHANNEL: "ci"
     CONAN_TOTAL_PAGES: 1
 
     matrix:
