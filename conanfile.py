@@ -50,6 +50,9 @@ class YamlCppConan( ConanFile ):
 
   def package_info( self ):
     if self.settings.os == 'Windows':
-      self.cpp_info.libs = [ 'libyaml-cppmd' ]
+      if self.settings.build_type == 'Debug':
+        self.cpp_info.libs = [ 'libyaml-cppmdd' ]
+      else:
+        self.cpp_info.libs = [ 'libyaml-cppmd' ]
     else:
       self.cpp_info.libs = [ 'yaml-cpp' ]
