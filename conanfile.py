@@ -10,8 +10,11 @@ class YamlCppConan( ConanFile ):
   license = 'MIT https://github.com/jbeder/yaml-cpp/blob/master/LICENSE'
   url = 'https://github.com/MoonForged/conan-yaml-cpp'
   settings = 'os', 'compiler', 'build_type', 'arch'
-  options = { 'shared': [ True, False ] }
-  default_options = 'shared=False'
+  options = {
+    'shared': [ True, False ],
+    'minosx': ['10.8', '10.9', '10.10', '10.11']
+  }
+  default_options = 'shared=False', 'minosx=10.8'
   generators = 'cmake'
   requires = 'Boost/1.60.0@lasote/stable'
   folder = '%s-%s-%s' % ( name, name, version )
@@ -35,6 +38,7 @@ class YamlCppConan( ConanFile ):
   def build( self ):
     cmake = CMake( self.settings )
     flags = '-DBUILD_SHARED_LIBS=ON' if self.options.shared else ''
+    flags += ' -DCMAKE_OSX_DEPLOYMENT_TARGET=%s' % self.options.minosx
     self.run( 'cd %s && mkdir _build' % self.folder )
     configure_command = 'cd %s/_build && cmake .. %s' % ( self.folder, cmake.command_line )
     self.output.info( 'Configure with: %s' % configure_command )
