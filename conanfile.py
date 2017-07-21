@@ -19,6 +19,11 @@ class YamlCppConan( ConanFile ):
   requires = 'Boost/1.60.0@lasote/stable'
   folder = '%s-%s-%s' % ( name, name, version )
 
+  def configure(self):
+    if self.settings.os == "Windows" and self.settings.compiler == "gcc":
+      self.options["Boost"].without_coroutine = True
+      self.options["Boost"].without_coroutine2 = True
+
   def source( self ):
     zip_name = '%s-%s.tar.gz' % ( self.name, self.version )
     download( 'https://github.com/jbeder/yaml-cpp/archive/%s' % zip_name, zip_name )
@@ -53,7 +58,7 @@ class YamlCppConan( ConanFile ):
     self.copy( '*yaml-cpp*.a', dst='lib', keep_path=False )
 
   def package_info( self ):
-    if self.settings.os == 'Windows':
+    if self.settings.compiler == "Visual Studio":
       if self.settings.build_type == 'Debug':
         self.cpp_info.libs = [ 'libyaml-cppmdd' ]
       else:
