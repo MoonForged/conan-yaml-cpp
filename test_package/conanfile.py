@@ -1,12 +1,8 @@
 from conans import ConanFile, CMake
 import os
 
-username = os.getenv( '"CONAN_USERNAME', 'moonforged' )
-channel = os.getenv( 'CONAN_CHANNEL', 'testing' )
-
 class YamlCppTestConan( ConanFile ):
   settings = 'os', 'compiler', 'build_type', 'arch'
-  requires = 'yaml-cpp/0.5.3@%s/%s' %  (username, channel )
   generators = 'cmake'
 
   def build( self ):

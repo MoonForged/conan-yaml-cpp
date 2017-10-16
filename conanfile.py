@@ -16,7 +16,7 @@ class YamlCppConan( ConanFile ):
   }
   default_options = 'shared=False', 'minosx=10.8'
   generators = 'cmake'
-  requires = 'Boost/1.60.0@lasote/stable'
+  requires = "Boost/[>=1.64.0]@conan/stable"
   folder = '%s-%s-%s' % ( name, name, version )
 
   def source( self ):
@@ -53,7 +53,7 @@ class YamlCppConan( ConanFile ):
     self.copy( '*yaml-cpp*.a', dst='lib', keep_path=False )
 
   def package_info( self ):
-    if self.settings.os == 'Windows':
+    if self.settings.compiler == "Visual Studio":
       if self.settings.build_type == 'Debug':
         self.cpp_info.libs = [ 'libyaml-cppmdd' ]
       else:
