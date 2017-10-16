@@ -16,13 +16,8 @@ class YamlCppConan( ConanFile ):
   }
   default_options = 'shared=False', 'minosx=10.8'
   generators = 'cmake'
-  requires = 'Boost/1.60.0@lasote/stable'
+  requires = "Boost/[>=1.64.0]@conan/stable"
   folder = '%s-%s-%s' % ( name, name, version )
-
-  def configure(self):
-    if self.settings.os == "Windows" and self.settings.compiler == "gcc":
-      self.options["Boost"].without_coroutine = True
-      self.options["Boost"].without_coroutine2 = True
 
   def source( self ):
     zip_name = '%s-%s.tar.gz' % ( self.name, self.version )
